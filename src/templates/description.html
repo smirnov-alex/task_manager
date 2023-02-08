@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ task.title }}</title>
+</head>
+<body>
+    <a href="{% url 'home' %}">Главная</a> -> <a href="{% url 'tasks' category_id %}">{{ task.category}}</a>
+    <h2>{{ task.title }}</h2>
+    <h3>Описание</h3>
+    <p>{{ task.description}}</p>
+    <h3>Дата создания</h3>
+    <p>{{ task.task_date}}</p>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Category</title>
+</head>
+<body>
+    <a href="{% url 'home' %}">Главная</a>
+    <h2>{{ category }}</h2>
+
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Задача</th>
+            <th>Детали</th>
+            <th>Дата создания</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td><a href="{% url 'task_del' task.id %}">O</a></td>
+            <td><a href="{% url 'description' task.id %}">{{ task.title}}</a></td>
+        </tr>
+        {% endfor %}
+        lorem*2
+
+    </table>
+</body>
+</html>
