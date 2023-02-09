@@ -6,6 +6,10 @@
 </head>
 <body>
     <h1>Менеджер задач</h1>
+    <a href="{% url 'home' %}">Главная</a>
+    <p>
+    <button><a href="{% url 'add_category' %}">Добавить категорию</a></button>
+    </p>
     <h2>Категории задач</h2>
     <ul>
     {% for category in categories %}

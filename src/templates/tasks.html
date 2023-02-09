@@ -6,8 +6,11 @@
 </head>
 <body>
     <a href="{% url 'home' %}">Главная</a>
+    <p>
+    <button><a href="{% url 'add_task' category.title %}">Добавить задачу</a></button>
+    </p>
     <h2>{{ category }}</h2>
-
+    {% if tasks %}
     <table>
         <tr>
             <th>№</th>
@@ -21,8 +24,9 @@
             <td><a href="{% url 'description' task.id %}">{{ task.title}}</a></td>
         </tr>
         {% endfor %}
-        lorem*2
-
     </table>
+    {% else %}
+    <p>Задач пока нет. Для создания нажмите кнопку "Добавить задачу"</p>
+    {% endif %}
 </body>
 </html>

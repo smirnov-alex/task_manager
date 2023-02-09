@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add task</title>
+</head>
+<body>
+    <a href="{% url 'home' %}">Главная</a>
+    <h2>Категория: {{ category.title }}</h2>
+    <h3>Добавить задачу</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Добавить</button>
+    </form>
+</body>
+</html>

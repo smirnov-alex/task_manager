@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .forms import *
 from .models import *
 
 
@@ -35,3 +36,34 @@ def task_del(request, task_id):
     task.save()
     category = task.category.id
     return redirect(tasks, c_id=category)
+
+
+def add_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect(home)
+    else:
+        form = CategoryForm
+        context = {
+            'form': form,
+        }
+        return render(request, 'add_category.html', context)
+
+
+def add_task(request, category):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.category = Category.objects.get(title=category)
+            task.save()
+        return redirect(tasks, task.category.id)
+    else:
+        form = TaskForm
+        context = {
+            'form': form,
+            'category': category,
+        }
+        return render(request, 'add_task.html', context)
