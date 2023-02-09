@@ -67,3 +67,30 @@ def add_task(request, category):
             'category': category,
         }
         return render(request, 'add_task.html', context)
+
+
+def category_del(request, c_id):
+    category = Category.objects.get(pk=c_id)
+    category.delete()
+    return redirect(home)
+
+def done_tasks(request):
+    tasks = Tasks.objects.filter(is_done=True)
+    context = {
+        'tasks': tasks,
+    }
+    return render(request, 'done_tasks.html', context)
+
+
+def backup_task(request, task_id):
+    task = Tasks.objects.get(pk=task_id)
+    task.is_done = False
+    task.save()
+    return redirect(done_tasks)
+
+
+def delete_done_tasks(request):
+    tasks = Tasks.objects.filter(is_done=True)
+    tasks.delete()
+    return redirect(done_tasks)
+

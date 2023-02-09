@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Done tasks</title>
+</head>
+<body>
+    <a href="{% url 'home' %}">Главная</a>
+    <p>
+        <button><a href="{% url 'delete_done_tasks' %}">Удалить все выполненные задачи</a></button>
+    </p>
+        <h2>Выполненные задачи</h2>
+        {% if tasks %}
+        <table>
+            <tr>
+                <th>Статус</th>
+                <th>Задача</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                <td><a href="{% url 'backup_task' task.id %}">V</a></td>
+                <td><a href="{% url 'description' task.id %}">{{ task.title}}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>Выполненных задач пока нет.</p>
+        {% endif %}
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Category</title>
+    <title>{{ category.title }}</title>
 </head>
 <body>
     <a href="{% url 'home' %}">Главная</a>
@@ -13,10 +13,8 @@
     {% if tasks %}
     <table>
         <tr>
-            <th>№</th>
+            <th>Статус</th>
             <th>Задача</th>
-            <th>Детали</th>
-            <th>Дата создания</th>
         </tr>
         {% for task in tasks %}
         <tr>
