@@ -1,16 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ task.title }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ task.title }} :: {{ block.super }}
+{% endblock%}
+{% block content %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row pad-botm">
+            <div class="col-md-12 for-category">
+                <h4 class="header-line">Детали задачи</a></h4>
+                <h5 class="page-header">Категория: <a href="{% url 'tasks' category_id %}">{{ task.category }}</a></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        {{ task.title }}
+                    </div>
+                    <div class="panel-body">
+                        <p>{{ task.description}}</p>
+                    </div>
+                    <div class="panel-footer">
+                        {{ task.task_date}}
+                    </div>
+                </div>
+                <a href="{% url 'task_del' task.id %}" class="btn btn-success">Выполнено!</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
+
+<!--
     <a href="{% url 'home' %}">Главная</a> -> <a href="{% url 'tasks' category_id %}">{{ task.category}}</a>
     <h2>{{ task.title }}</h2>
     <h3>Описание</h3>
     <p>{{ task.description}}</p>
     <h3>Дата создания</h3>
     <p>{{ task.task_date}}</p>
-
-</body>
-</html>
+-->

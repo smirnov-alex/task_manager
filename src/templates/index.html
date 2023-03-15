@@ -1,32 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Task Manager</title>
-</head>
-<body>
-    <h1>Менеджер задач</h1>
-    <a href="{% url 'home' %}">Главная</a>
-    <p>
-        <button><a href="{% url 'add_category' %}">Добавить категорию</a></button>
-    </p>
-    <p>
-        <a href="{% url 'done_tasks' %}">Выполненные задачи</a>
-    </p>
-    <h2>Категории задач</h2>
-    <table>
-        <tr>
-            <th>№</th>
-            <th>Категория</th>
-            <th>Удалить категорию</th>
-        </tr>
-    {% for category in categories %}
-        <tr>
-            <td>{{ category.id }}</td>
-            <td><a href="{% url 'tasks' category.id %}">{{ category.title }}</a></td>
-            <td><a href="{% url 'category_del' category.id %}"> Удалить</a></td>
-        </tr>
-    {% endfor %}
-    </table>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row pad-botm">
+            <div class="col-md-12">
+                <h4 class="header-line">Менеджер задач</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!--   Kitchen Sink -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Категории задач
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Категория</th>
+                                    <th>Количество задач</th>
+                                    <th>Удалить категорию</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for category in categories %}
+                                <tr>
+                                    <td>{{ category.id }}</td>
+                                    <td><a href="{% url 'tasks' category.id %}">{{ category.title }}</a></td>
+                                    <td>{{ category.title }}</td>
+                                    <td><a href="{% url 'category_del' category.id %}" class="btn btn-danger"> Удалить</a></td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- End  Kitchen Sink -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

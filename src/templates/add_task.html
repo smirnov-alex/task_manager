@@ -1,17 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ category.title }} | Add task</title>
-</head>
-<body>
-    <a href="{% url 'home' %}">Главная</a>
-    <h2>Категория: {{ category.title }}</h2>
-    <h3>Добавить задачу</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <button type="submit">Добавить</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ category.title }} :: Add task :: {{ block.super }}
+{% endblock%}
+{% block content %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row pad-botm">
+            <div class="col-md-12 for-category">
+                <h4 class="header-line">Категория: {{ category.title }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Добавить задачу
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method="post">
+                            <div class="form-group">
+                                {% csrf_token %}
+                                {{ form.as_p}}
+                            </div>
+                            <button type="submit" class="btn btn-info">Добавить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

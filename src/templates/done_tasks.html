@@ -1,30 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Done tasks</title>
-</head>
-<body>
-    <a href="{% url 'home' %}">Главная</a>
-    <p>
-        <button><a href="{% url 'delete_done_tasks' %}">Удалить все выполненные задачи</a></button>
-    </p>
-        <h2>Выполненные задачи</h2>
-        {% if tasks %}
-        <table>
-            <tr>
-                <th>Статус</th>
-                <th>Задача</th>
-            </tr>
-            {% for task in tasks %}
-            <tr>
-                <td><a href="{% url 'backup_task' task.id %}">V</a></td>
-                <td><a href="{% url 'description' task.id %}">{{ task.title}}</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        <p>Выполненных задач пока нет.</p>
-        {% endif %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Done tasks :: {{ block.super }}
+{% endblock%}
+{% block content %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row pad-botm">
+            <div class="col-md-12 for-category">
+                <h4 class="header-line">Выполненные задачи</h4>
+                <a class="btn btn-danger btn-add-task " href="{% url 'delete_done_tasks' %}">Удалить все выполненные
+                    задачи</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!--   Kitchen Sink -->
+                {% if tasks %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Выполненные задачи
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Статус</th>
+                                    <th>Задача</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for task in tasks %}
+                                <tr>
+                                    <td><a href="{% url 'backup_task' task.id %}" class="btn btn-info">Восстановить задачу</a></td>
+                                    <td><a href="{% url 'description' task.id %}">{{ task.title}}</a></td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- End  Kitchen Sink -->
+                {% else %}
+                <div class="well">
+                    <h4>Задач пока нет.</h4>
+                    <p> Выполненных задач пока нет.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

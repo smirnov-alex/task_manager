@@ -74,6 +74,7 @@ def category_del(request, c_id):
     category.delete()
     return redirect(home)
 
+
 def done_tasks(request):
     tasks = Tasks.objects.filter(is_done=True)
     context = {
